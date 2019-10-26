@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'groovy'
+	id 'idea'
 }
 
 group = 'com.sample.git'
@@ -14,11 +16,60 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation('org.springframework.retry:spring-retry')
+	implementation('org.springframework.boot:spring-boot-starter-aop')
+
+	// Clean and Sane Coding
+	annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+	compileOnly("org.projectlombok:lombok:${lombokVersion}")
+
+	// Tests
+	testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+	testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation("org.spockframework:spock-core:${spockVersion}")
+	testImplementation("org.spockframework:spock-spring:${spockVersion}")
 }
 
-test {
-	useJUnitPlatform()
+idea {
+	module {
+		downloadJavadoc = false
+		downloadSources = true
+		jdkName = '11'
+		excludeDirs += file('logs')
+		excludeDirs += file('.gradle')
+		excludeDirs += file('build')
+	}
+	project {
+		vcs = 'Git'
+		jdkName = '11'
+		languageLevel = '11'
+
+		// Enables annotation processing: http://mrhaki.blogspot.com/2016/03/gradle-goodness-enable-compiler.html
+		ipr {
+			withXml { provider ->
+				// Get XML as groovy.util.Node to work with.
+				def projectXml = provider.asNode()
+
+				// Find compiler configuration component.
+				def compilerConfiguration = projectXml.component.find { component ->
+					component.'@name' == 'CompilerConfiguration'
+				}
+
+				// Replace current annotationProcessing
+				// that is part of the compiler configuration.
+				def currentAnnotationProcessing = compilerConfiguration.annotationProcessing
+				currentAnnotationProcessing.replaceNode {
+					annotationProcessing {
+						profile(name: 'Default', default: true, enabled: true) {
+							processorPath(useClasspath: true)
+						}
+					}
+				}
+			}
+		}
+	}
 }
