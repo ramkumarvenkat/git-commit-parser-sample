@@ -2,12 +2,15 @@ package com.sample.git.parser.api
 
 import com.sample.git.parser.BaseIntSpec
 import com.sample.git.parser.impl.GitParserException
-import com.sample.git.parser.impl.cli.GitCliClient
-import com.sample.git.parser.impl.cli.ProcessRunner
+import com.sample.git.parser.impl.gitcli.GitCliClient
+import com.sample.git.parser.impl.gitcli.ProcessRunner
 import com.sample.git.parser.impl.models.Commit
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import spock.lang.Stepwise
 
 import java.time.Instant
 import java.util.concurrent.CompletableFuture
@@ -15,6 +18,7 @@ import java.util.concurrent.CompletableFuture
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
+@Stepwise
 class GitParserApiControllerIntSpec extends BaseIntSpec {
 
 	@Autowired
@@ -30,9 +34,29 @@ class GitParserApiControllerIntSpec extends BaseIntSpec {
 		client.setRunner(runner)
 	}
 
-	def "getCommits works"() {
+	def "getCommits works with the github api"() {
 		given:
 			def url = "https://github.com/test/test1.git"
+			mockRequestResponse("/repos/test/test1/commits", HttpMethod.GET, HttpStatus.OK, "/impl/gitapi/response.json")
+
+		when:
+			def results = mockMvc.perform(get("/api/v1/git/parser/commits?url=" + url)
+					.contentType(MediaType.APPLICATION_JSON_VALUE)
+					.content(this.class.getResourceAsStream("/api/response.json").bytes))
+
+		then:
+			results.andExpect(status().isOk())
+
+		and:
+			0 * runner.run(_, _, "git", "clone", _, _)
+	}
+
+	def "getCommits works when github api fails and fallback to git cli"() {
+		given:
+			def url = "https://github.com/test/test1.git"
+
+			mockRequestResponse("/repos/test/test1/commits", HttpMethod.GET, HttpStatus.INTERNAL_SERVER_ERROR, "/impl/gitapi/response.json")
+
 			def cloneOutputFuture = new CompletableFuture<List<String>>()
 			def cloneErrorFuture = new CompletableFuture<List<String>>()
 
@@ -60,6 +84,9 @@ class GitParserApiControllerIntSpec extends BaseIntSpec {
 	def "getCommits retries happen when git clone times out"() {
 		when:
 			def url = "https://github.com/test/test1.git"
+
+			mockRequestResponse("/repos/test/test1/commits", HttpMethod.GET, HttpStatus.INTERNAL_SERVER_ERROR, "/impl/gitapi/response.json")
+
 			def results = mockMvc.perform(get("/api/v1/git/parser/commits?url=" + url)
 					.contentType(MediaType.APPLICATION_JSON_VALUE))
 

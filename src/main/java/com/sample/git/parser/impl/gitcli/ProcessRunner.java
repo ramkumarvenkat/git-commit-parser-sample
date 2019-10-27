@@ -1,4 +1,4 @@
-package com.sample.git.parser.impl.cli;
+package com.sample.git.parser.impl.gitcli;
 
 import com.sample.git.parser.impl.GitParserException;
 import lombok.AllArgsConstructor;

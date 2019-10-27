@@ -1,4 +1,4 @@
-package com.sample.git.parser.impl.cli.commands;
+package com.sample.git.parser.impl.gitcli.commands;
 
 import com.sample.git.parser.impl.GitParserException;
 

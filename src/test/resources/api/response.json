@@ -1,0 +1,16 @@
+[
+  {
+    "sha": "545f115be1890170ac157fb7f42e5206bd654e98",
+    "authorName": "Ramkumar Venkataraman",
+    "authorEmail": "ramkumar.venkat@gmail.com",
+    "timestamp": "2016-03-07T07:00:53Z",
+    "subject": "Adding README"
+  },
+  {
+    "sha": "aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+    "authorName": "Ramkumar Venkataraman",
+    "authorEmail": "ramkumar.venkat@gmail.com",
+    "timestamp": "2016-03-07T07:00:31Z",
+    "subject": "Changing extension of compose file"
+  }
+]

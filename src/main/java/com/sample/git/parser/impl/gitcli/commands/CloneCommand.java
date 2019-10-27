@@ -1,7 +1,7 @@
-package com.sample.git.parser.impl.cli.commands;
+package com.sample.git.parser.impl.gitcli.commands;
 
 import com.sample.git.parser.impl.GitParserException;
-import com.sample.git.parser.impl.cli.ProcessRunner;
+import com.sample.git.parser.impl.gitcli.ProcessRunner;
 import com.sample.git.parser.impl.models.Repository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,11 +1,16 @@
-package com.sample.git.parser.impl.cli
+package com.sample.git.parser.impl.gitcli
 
 import com.sample.git.parser.BaseSpec
+import com.sample.git.parser.impl.GitParserException
 
 class GitCliClientE2ESpec extends BaseSpec {
 
-	def runner = new ProcessRunner(executor);
-	def client = new GitCliClient(runner);
+	def runner = new ProcessRunner(executor)
+	def client = new GitCliClient(runner)
+
+	def setup() {
+		runner.setPROCESS_TIMEOUT_SECONDS("30")
+	}
 
 	def "getCommits works on valid git url"() {
 		when:
@@ -20,6 +25,6 @@ class GitCliClientE2ESpec extends BaseSpec {
 			client.getCommits("https://github.com/ramkumarvenkat/randomrepo.git");
 
 		then:
-			thrown(RuntimeException)
+			thrown(GitParserException)
 	}
 }

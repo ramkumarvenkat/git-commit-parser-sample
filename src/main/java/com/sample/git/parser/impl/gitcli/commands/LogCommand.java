@@ -1,7 +1,7 @@
-package com.sample.git.parser.impl.cli.commands;
+package com.sample.git.parser.impl.gitcli.commands;
 
 import com.sample.git.parser.impl.GitParserException;
-import com.sample.git.parser.impl.cli.ProcessRunner;
+import com.sample.git.parser.impl.gitcli.ProcessRunner;
 import com.sample.git.parser.impl.models.Commit;
 import lombok.Builder;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class LogCommand implements IGitCommand<List<Commit>> {
 		StringBuilder prettyFormatBuilder = new StringBuilder();
 		if(prettyFormat != null) {
 			List<String> formatStrings = new ArrayList<>();
-			if(prettyFormat.sha) formatStrings.add("%h");
+			if(prettyFormat.sha) formatStrings.add("%H");
 			if(prettyFormat.authorName) formatStrings.add("%an");
 			if(prettyFormat.authorEmail) formatStrings.add("%ae");
 			if(prettyFormat.date) formatStrings.add("%ad");

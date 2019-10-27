@@ -1,0 +1,160 @@
+[
+  {
+    "sha": "545f115be1890170ac157fb7f42e5206bd654e98",
+    "node_id": "MDY6Q29tbWl0NTEyNDQxNzk6NTQ1ZjExNWJlMTg5MDE3MGFjMTU3ZmI3ZjQyZTUyMDZiZDY1NGU5OA==",
+    "commit": {
+      "author": {
+        "name": "Ramkumar Venkataraman",
+        "email": "ramkumar.venkat@gmail.com",
+        "date": "2016-03-07T07:00:53Z"
+      },
+      "committer": {
+        "name": "Ramkumar Venkataraman",
+        "email": "ramkumar.venkat@gmail.com",
+        "date": "2016-03-17T12:07:12Z"
+      },
+      "message": "Adding README",
+      "tree": {
+        "sha": "c04629f14e2a4e41c7b1f2f8308df6b6faa9dc28",
+        "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/git/trees/c04629f14e2a4e41c7b1f2f8308df6b6faa9dc28"
+      },
+      "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/git/commits/545f115be1890170ac157fb7f42e5206bd654e98",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/545f115be1890170ac157fb7f42e5206bd654e98",
+    "html_url": "https://github.com/ramkumarvenkat/kafka-spark-streaming-druid/commit/545f115be1890170ac157fb7f42e5206bd654e98",
+    "comments_url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/545f115be1890170ac157fb7f42e5206bd654e98/comments",
+    "author": {
+      "login": "ramkumarvenkat",
+      "id": 7872214,
+      "node_id": "MDQ6VXNlcjc4NzIyMTQ=",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7872214?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ramkumarvenkat",
+      "html_url": "https://github.com/ramkumarvenkat",
+      "followers_url": "https://api.github.com/users/ramkumarvenkat/followers",
+      "following_url": "https://api.github.com/users/ramkumarvenkat/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ramkumarvenkat/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ramkumarvenkat/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ramkumarvenkat/subscriptions",
+      "organizations_url": "https://api.github.com/users/ramkumarvenkat/orgs",
+      "repos_url": "https://api.github.com/users/ramkumarvenkat/repos",
+      "events_url": "https://api.github.com/users/ramkumarvenkat/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ramkumarvenkat/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "ramkumarvenkat",
+      "id": 7872214,
+      "node_id": "MDQ6VXNlcjc4NzIyMTQ=",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7872214?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ramkumarvenkat",
+      "html_url": "https://github.com/ramkumarvenkat",
+      "followers_url": "https://api.github.com/users/ramkumarvenkat/followers",
+      "following_url": "https://api.github.com/users/ramkumarvenkat/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ramkumarvenkat/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ramkumarvenkat/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ramkumarvenkat/subscriptions",
+      "organizations_url": "https://api.github.com/users/ramkumarvenkat/orgs",
+      "repos_url": "https://api.github.com/users/ramkumarvenkat/repos",
+      "events_url": "https://api.github.com/users/ramkumarvenkat/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ramkumarvenkat/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+        "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+        "html_url": "https://github.com/ramkumarvenkat/kafka-spark-streaming-druid/commit/aebb905dc6f1c32857f0b453cc154e825c9b5ebb"
+      }
+    ]
+  },
+  {
+    "sha": "aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+    "node_id": "MDY6Q29tbWl0NTEyNDQxNzk6YWViYjkwNWRjNmYxYzMyODU3ZjBiNDUzY2MxNTRlODI1YzliNWViYg==",
+    "commit": {
+      "author": {
+        "name": "Ramkumar Venkataraman",
+        "email": "ramkumar.venkat@gmail.com",
+        "date": "2016-03-07T07:00:31Z"
+      },
+      "committer": {
+        "name": "Ramkumar Venkataraman",
+        "email": "ramkumar.venkat@gmail.com",
+        "date": "2016-03-17T12:07:11Z"
+      },
+      "message": "Changing extension of compose file",
+      "tree": {
+        "sha": "80b5c44bccbed4ef736119162aa1cd41ff879c1b",
+        "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/git/trees/80b5c44bccbed4ef736119162aa1cd41ff879c1b"
+      },
+      "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/git/commits/aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+    "html_url": "https://github.com/ramkumarvenkat/kafka-spark-streaming-druid/commit/aebb905dc6f1c32857f0b453cc154e825c9b5ebb",
+    "comments_url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/aebb905dc6f1c32857f0b453cc154e825c9b5ebb/comments",
+    "author": {
+      "login": "ramkumarvenkat",
+      "id": 7872214,
+      "node_id": "MDQ6VXNlcjc4NzIyMTQ=",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7872214?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ramkumarvenkat",
+      "html_url": "https://github.com/ramkumarvenkat",
+      "followers_url": "https://api.github.com/users/ramkumarvenkat/followers",
+      "following_url": "https://api.github.com/users/ramkumarvenkat/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ramkumarvenkat/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ramkumarvenkat/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ramkumarvenkat/subscriptions",
+      "organizations_url": "https://api.github.com/users/ramkumarvenkat/orgs",
+      "repos_url": "https://api.github.com/users/ramkumarvenkat/repos",
+      "events_url": "https://api.github.com/users/ramkumarvenkat/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ramkumarvenkat/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "ramkumarvenkat",
+      "id": 7872214,
+      "node_id": "MDQ6VXNlcjc4NzIyMTQ=",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7872214?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ramkumarvenkat",
+      "html_url": "https://github.com/ramkumarvenkat",
+      "followers_url": "https://api.github.com/users/ramkumarvenkat/followers",
+      "following_url": "https://api.github.com/users/ramkumarvenkat/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ramkumarvenkat/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ramkumarvenkat/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ramkumarvenkat/subscriptions",
+      "organizations_url": "https://api.github.com/users/ramkumarvenkat/orgs",
+      "repos_url": "https://api.github.com/users/ramkumarvenkat/repos",
+      "events_url": "https://api.github.com/users/ramkumarvenkat/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ramkumarvenkat/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4779dbb8815c599fc4c93059257a9f1707afcbc3",
+        "url": "https://api.github.com/repos/ramkumarvenkat/kafka-spark-streaming-druid/commits/4779dbb8815c599fc4c93059257a9f1707afcbc3",
+        "html_url": "https://github.com/ramkumarvenkat/kafka-spark-streaming-druid/commit/4779dbb8815c599fc4c93059257a9f1707afcbc3"
+      }
+    ]
+  }
+]

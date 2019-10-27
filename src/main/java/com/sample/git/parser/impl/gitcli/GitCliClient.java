@@ -1,11 +1,11 @@
-package com.sample.git.parser.impl.cli;
+package com.sample.git.parser.impl.gitcli;
 
 import com.sample.git.parser.impl.GitParserException;
 import com.sample.git.parser.impl.IRepositoryClient;
-import com.sample.git.parser.impl.cli.commands.CloneCommand;
-import com.sample.git.parser.impl.cli.commands.LogCommand;
-import com.sample.git.parser.impl.cli.commands.LogCommand.DateFormat;
-import com.sample.git.parser.impl.cli.commands.LogCommand.PrettyFormat;
+import com.sample.git.parser.impl.gitcli.commands.CloneCommand;
+import com.sample.git.parser.impl.gitcli.commands.LogCommand;
+import com.sample.git.parser.impl.gitcli.commands.LogCommand.DateFormat;
+import com.sample.git.parser.impl.gitcli.commands.LogCommand.PrettyFormat;
 import com.sample.git.parser.impl.models.Commit;
 import com.sample.git.parser.impl.models.Repository;
 import lombok.Data;

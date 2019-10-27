@@ -1,4 +1,4 @@
-package com.sample.git.parser.impl.cli
+package com.sample.git.parser.impl.gitcli
 
 import com.sample.git.parser.impl.GitParserException
 import com.sample.git.parser.impl.models.Commit
@@ -56,7 +56,7 @@ class GitCliClientSpec extends Specification {
 			client.getCommits(url)
 
 		then:
-			thrown(RuntimeException)
+			thrown(GitParserException)
 	}
 
 	def "getCommits throws checked exception when git clone times out"() {
