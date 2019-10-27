@@ -3,6 +3,7 @@ package com.sample.git.parser.api;
 import com.sample.git.parser.impl.GitDecoratedClient;
 import com.sample.git.parser.impl.GitParserException;
 import com.sample.git.parser.impl.models.Commit;
+import com.sample.git.parser.impl.models.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,12 @@ public class GitParserApiController {
 	private GitDecoratedClient client;
 
 	@GetMapping("/commits")
-	public List<Commit> getCommits(@RequestParam String url) throws GitParserException {
-		return client.getCommits(url);
+	public List<Commit> getCommits(@RequestParam String url,
+	                               @RequestParam(required = false) Integer page,
+	                               @RequestParam(required = false) Integer count) throws GitParserException {
+		Page pagination = null;
+		if(page != null && count != null) pagination = new Page(page, count);
+		return client.getCommits(url, pagination);
 	}
 
 	@ExceptionHandler(GitParserException.class)

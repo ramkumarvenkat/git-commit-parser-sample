@@ -5,6 +5,7 @@ import com.sample.git.parser.impl.GitParserException
 import com.sample.git.parser.impl.gitapi.models.GitApiCommit
 import com.sample.git.parser.impl.gitapi.models.GitApiCommitAuthor
 import com.sample.git.parser.impl.gitapi.models.GitApiCommitDetails
+import com.sample.git.parser.impl.models.Page
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestClientException
@@ -37,7 +38,7 @@ class GitApiClientIntSpec extends BaseIntSpec {
 			)
 
 		when:
-			def results = client.getCommits(url)
+			def results = client.getCommits(url, new Page(2, 1))
 
 		then:
 			results.size() == 1
@@ -46,7 +47,7 @@ class GitApiClientIntSpec extends BaseIntSpec {
 	def "getCommits retries when there is an exception in calling git api"() {
 		when:
 			def url = "https://github.com/test/test1.git"
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(GitParserException)

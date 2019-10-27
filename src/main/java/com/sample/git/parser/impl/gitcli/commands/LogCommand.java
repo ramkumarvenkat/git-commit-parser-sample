@@ -3,6 +3,7 @@ package com.sample.git.parser.impl.gitcli.commands;
 import com.sample.git.parser.impl.GitParserException;
 import com.sample.git.parser.impl.gitcli.ProcessRunner;
 import com.sample.git.parser.impl.models.Commit;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class LogCommand implements IGitCommand<List<Commit>> {
 	private final Path directory;
 	private final DateFormat dateFormat;
 	private final PrettyFormat prettyFormat;
+	private final Pagination paginaton;
 	private final ProcessRunner runner;
 
 	@Override
@@ -31,7 +33,7 @@ public class LogCommand implements IGitCommand<List<Commit>> {
 
 		StringBuilder dateFormatBuilder = new StringBuilder();
 		if(dateFormat != null) {
-			dateFormatBuilder.append("--date=" + dateFormat.getValue());
+			dateFormatBuilder.append("--date=").append(dateFormat.getValue());
 		}
 
 		StringBuilder prettyFormatBuilder = new StringBuilder();
@@ -49,10 +51,17 @@ public class LogCommand implements IGitCommand<List<Commit>> {
 					.append("\"");
 		}
 
+		StringBuilder skipBuilder = new StringBuilder();
+		StringBuilder maxcountBuilder = new StringBuilder();
+		if(paginaton != null) {
+			skipBuilder.append("--skip=").append(paginaton.skipCount());
+			maxcountBuilder.append("--max-count=").append(paginaton.getCount());
+		}
+
 		ProcessRunner.ExecutionResult<Commit> resultsF = runner.run(
 				directory,
 				fn,
-				"git", "log", dateFormatBuilder.toString(), prettyFormatBuilder.toString()
+				"git", "log", dateFormatBuilder.toString(), prettyFormatBuilder.toString(), skipBuilder.toString(), maxcountBuilder.toString()
 		);
 
 		// Bad code, this is a blocking call
@@ -93,5 +102,17 @@ public class LogCommand implements IGitCommand<List<Commit>> {
 		private boolean authorEmail;
 		private boolean date;
 		private boolean subject;
+	}
+
+	@Data
+	@Builder
+	@AllArgsConstructor
+	public static class Pagination {
+		private int page;
+		private int count;
+
+		int skipCount() {
+			return (page - 1) * count;
+		}
 	}
 }

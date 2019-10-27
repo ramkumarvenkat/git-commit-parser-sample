@@ -5,8 +5,10 @@ import com.sample.git.parser.impl.IRepositoryClient;
 import com.sample.git.parser.impl.gitcli.commands.CloneCommand;
 import com.sample.git.parser.impl.gitcli.commands.LogCommand;
 import com.sample.git.parser.impl.gitcli.commands.LogCommand.DateFormat;
+import com.sample.git.parser.impl.gitcli.commands.LogCommand.Pagination;
 import com.sample.git.parser.impl.gitcli.commands.LogCommand.PrettyFormat;
 import com.sample.git.parser.impl.models.Commit;
+import com.sample.git.parser.impl.models.Page;
 import com.sample.git.parser.impl.models.Repository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +31,7 @@ public class GitCliClient implements IRepositoryClient {
 	}
 
 	@Override
-	public List<Commit> getCommits(String url) throws GitParserException {
+	public List<Commit> getCommits(String url, Page page) throws GitParserException {
 		try {
 			Repository repository = new Repository(url);
 			Path directory = Files.createTempDirectory("git-parser-sample");
@@ -44,7 +46,11 @@ public class GitCliClient implements IRepositoryClient {
 					.date(true)
 					.subject(true)
 					.build();
-			LogCommand logCommand = new LogCommand(repositoryDirectory, DateFormat.ISO_STRICT, format, runner);
+
+			Pagination pagination = null;
+			if(page != null) pagination = new Pagination(page.getPageNumber(), page.getCount());
+
+			LogCommand logCommand = new LogCommand(repositoryDirectory, DateFormat.ISO_STRICT, format, pagination, runner);
 			return logCommand.call();
 		} catch(IOException e) {
 			log.error("Could not create tmp directory", e);

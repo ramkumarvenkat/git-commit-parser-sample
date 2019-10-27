@@ -2,6 +2,7 @@ package com.sample.git.parser.impl.gitcli
 
 import com.sample.git.parser.impl.GitParserException
 import com.sample.git.parser.impl.models.Commit
+import com.sample.git.parser.impl.models.Page
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -23,7 +24,7 @@ class GitCliClientSpec extends Specification {
 
 			def logOutputFuture = new CompletableFuture<List<Commit>>()
 			def logErrorFuture = new CompletableFuture<List<String>>()
-			runner.run(_, _, "git", "log", _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
+			runner.run(_, _, "git", "log", _, _, _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
 
 		when:
 			cloneOutputFuture.complete(Collections.emptyList())
@@ -32,7 +33,7 @@ class GitCliClientSpec extends Specification {
 			logOutputFuture.complete(Arrays.asList(new Commit("sha", "name", "name@gmail.com", Instant.now(), "subject")))
 			logErrorFuture.complete(Collections.emptyList())
 
-			def results = client.getCommits(url)
+			def results = client.getCommits(url, new Page(2, 1))
 
 		then:
 			results.size() == 1
@@ -53,7 +54,7 @@ class GitCliClientSpec extends Specification {
 			cloneOutputFuture.complete(Collections.emptyList())
 			cloneErrorFuture.complete(Arrays.asList("Cloning into 'kafka-spark-streaming-druid'", "fatal: Repository not found"))
 
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(GitParserException)
@@ -71,7 +72,7 @@ class GitCliClientSpec extends Specification {
 			}
 
 		when:
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(GitParserException)
@@ -90,7 +91,7 @@ class GitCliClientSpec extends Specification {
 			}
 
 		when:
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(RuntimeException)
@@ -110,7 +111,7 @@ class GitCliClientSpec extends Specification {
 			def cloneErrorFuture = new CompletableFuture<List<String>>()
 			runner.run(_, _, "git", "clone", _, _) >> new ProcessRunner.ExecutionResult(cloneOutputFuture, cloneErrorFuture)
 
-			runner.run(_, _, "git", "log", _, _) >> {
+			runner.run(_, _, "git", "log", _, _, _, _) >> {
 				throw new GitParserException("error")
 			}
 
@@ -118,7 +119,7 @@ class GitCliClientSpec extends Specification {
 			cloneOutputFuture.complete(Collections.emptyList())
 			cloneErrorFuture.complete(Arrays.asList("Cloning into 'kafka-spark-streaming-druid'", "Unpacking objects: 100% (98/98), done"))
 
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(GitParserException)
@@ -137,7 +138,7 @@ class GitCliClientSpec extends Specification {
 
 			def logOutputFuture = new CompletableFuture<List<Commit>>()
 			def logErrorFuture = new CompletableFuture<List<String>>()
-			runner.run(_, _, "git", "log", _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
+			runner.run(_, _, "git", "log", _, _, _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
 
 		when:
 			cloneOutputFuture.complete(Collections.emptyList())
@@ -146,7 +147,7 @@ class GitCliClientSpec extends Specification {
 			logOutputFuture.complete(Arrays.asList(new Commit("sha", "name", "name@gmail.com", Instant.now(), "subject")))
 			logErrorFuture.complete("Error")
 
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(RuntimeException)
@@ -165,13 +166,13 @@ class GitCliClientSpec extends Specification {
 
 			def logOutputFuture = new CompletableFuture<List<Commit>>()
 			def logErrorFuture = new CompletableFuture<List<String>>()
-			runner.run(_, _, "git", "log", _, _) >> new RuntimeException()
+			runner.run(_, _, "git", "log", _, _, _, _) >> new RuntimeException()
 
 		when:
 			cloneOutputFuture.complete(Collections.emptyList())
 			cloneErrorFuture.complete(Arrays.asList("Cloning into 'kafka-spark-streaming-druid'", "Unpacking objects: 100% (98/98), done"))
 
-			client.getCommits(url)
+			client.getCommits(url, new Page(2, 1))
 
 		then:
 			thrown(RuntimeException)

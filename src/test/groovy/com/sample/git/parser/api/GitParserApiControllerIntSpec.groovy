@@ -78,7 +78,7 @@ class GitParserApiControllerIntSpec extends BaseIntSpec {
 
 		and:
 			1 * runner.run(_, _, "git", "clone", _, _) >> new ProcessRunner.ExecutionResult(cloneOutputFuture, cloneErrorFuture)
-			1 * runner.run(_, _, "git", "log", _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
+			1 * runner.run(_, _, "git", "log", _, _, _, _) >> new ProcessRunner.ExecutionResult(logOutputFuture, logErrorFuture)
 	}
 
 	def "getCommits retries happen when git clone times out"() {
@@ -97,6 +97,6 @@ class GitParserApiControllerIntSpec extends BaseIntSpec {
 			3 * runner.run(_, _, "git", "clone", _, _) >> {
 				throw new GitParserException("error")
 			}
-			0 * runner.run(_, _, "git", "log", _, _)
+			0 * runner.run(_, _, "git", "log", _, _, _, _)
 	}
 }

@@ -6,6 +6,7 @@ import com.sample.git.parser.impl.gitapi.models.GitApiCommit;
 import com.sample.git.parser.impl.gitapi.models.GitApiCommitAuthor;
 import com.sample.git.parser.impl.gitapi.models.GitApiCommitDetails;
 import com.sample.git.parser.impl.models.Commit;
+import com.sample.git.parser.impl.models.Page;
 import com.sample.git.parser.impl.models.Repository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -33,14 +34,18 @@ public class GitApiClient implements IRepositoryClient {
 	}
 
 	@Override
-	public List<Commit> getCommits(String url) throws GitParserException {
+	public List<Commit> getCommits(String url, Page page) throws GitParserException {
 		Repository repository = new Repository(url);
 		String owner = repository.getOwnerName().orElseThrow(() -> new IllegalArgumentException("Repository url is wrong, cannot extract the owner name"));
 		String name = repository.getName().orElseThrow(() -> new IllegalArgumentException("Repository url is wrong, cannot extract the name"));
 
 		try {
+			String gitUrl = "/repos/{owner}/{repo}/commits";
+			if(page != null) {
+				gitUrl = gitUrl + "?per_page=" + page.getCount() + "&page=" + page.getPageNumber();
+			}
 			ResponseEntity<List<GitApiCommit>> response = restTemplate.exchange(
-					"/repos/{owner}/{repo}/commits",
+					gitUrl,
 					HttpMethod.GET,
 					null,
 					new ParameterizedTypeReference<>() {},
